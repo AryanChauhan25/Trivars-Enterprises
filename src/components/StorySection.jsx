@@ -1,6 +1,11 @@
+import storyBackground from '../assets/background.png'
+
 function StorySection({ descriptionText }) {
   return (
-    <section className="section story-band">
+    <section
+      className="section story-band"
+      style={{ '--story-bg-image': `url(${storyBackground})` }}
+    >
       <div className="story-copy">
         <p className="eyebrow">About Us</p>
         <h2>Your Reliable Partner for Corporate Stationery Solutions</h2>

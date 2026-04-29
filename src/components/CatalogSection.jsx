@@ -1,87 +1,58 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-
-function getVisibleCount(width) {
-  if (width <= 640) return 1
-  if (width <= 980) return 2
-  return 3
-}
+import { useCallback, useEffect, useState } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css'
 
 function CatalogSection({ products, searchTerm, onSearchChange, onOpenEmail, onOpenWhatsapp }) {
-  const [visibleCount, setVisibleCount] = useState(() => getVisibleCount(window.innerWidth))
   const [activePage, setActivePage] = useState(0)
-  const touchStartX = useRef(null)
-  const touchStartY = useRef(null)
+  const [scrollSnaps, setScrollSnaps] = useState([])
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      align: 'start',
+      loop: products.length > 3,
+      slidesToScroll: 1,
+      dragFree: false,
+      dragThreshold: 12,
+    },
+    [
+      Autoplay({
+        delay: 4200,
+        stopOnInteraction: true,
+        stopOnMouseEnter: true,
+      }),
+    ],
+  )
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return
+    setActivePage(emblaApi.selectedScrollSnap())
+  }, [emblaApi])
 
   useEffect(() => {
-    function handleResize() {
-      setVisibleCount(getVisibleCount(window.innerWidth))
-    }
+    if (!emblaApi) return
+    setScrollSnaps(emblaApi.scrollSnapList())
+    onSelect()
+    emblaApi.on('select', onSelect)
+    emblaApi.on('reInit', onSelect)
 
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  const productPages = useMemo(() => {
-    const pages = []
-    for (let index = 0; index < products.length; index += visibleCount) {
-      pages.push(products.slice(index, index + visibleCount))
+    return () => {
+      emblaApi.off('select', onSelect)
+      emblaApi.off('reInit', onSelect)
     }
-    return pages
-  }, [products, visibleCount])
+  }, [emblaApi, onSelect])
 
   useEffect(() => {
+    if (!emblaApi) return
+    emblaApi.reInit({ align: 'start', loop: products.length > 3, slidesToScroll: 1, dragFree: false })
+    setScrollSnaps(emblaApi.scrollSnapList())
     setActivePage(0)
-  }, [products, visibleCount])
-
-  useEffect(() => {
-    if (productPages.length <= 1) return undefined
-
-    const timer = window.setInterval(() => {
-      setActivePage((current) => (current + 1) % productPages.length)
-    }, 3200)
-
-    return () => window.clearInterval(timer)
-  }, [productPages.length])
+    emblaApi.scrollTo(0, true)
+  }, [emblaApi, products])
 
   function goToPage(index) {
-    setActivePage(index)
-  }
-
-  function goToNextPage() {
-    if (productPages.length <= 1) return
-    setActivePage((current) => (current + 1) % productPages.length)
-  }
-
-  function goToPrevPage() {
-    if (productPages.length <= 1) return
-    setActivePage((current) => (current - 1 + productPages.length) % productPages.length)
-  }
-
-  function handleTouchStart(event) {
-    const firstTouch = event.touches[0]
-    touchStartX.current = firstTouch.clientX
-    touchStartY.current = firstTouch.clientY
-  }
-
-  function handleTouchEnd(event) {
-    if (touchStartX.current === null || touchStartY.current === null) return
-
-    const endTouch = event.changedTouches[0]
-    const deltaX = touchStartX.current - endTouch.clientX
-    const deltaY = touchStartY.current - endTouch.clientY
-    const minSwipeDistance = 40
-
-    // Only handle horizontal gestures so normal page scroll still feels natural.
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
-      if (deltaX > 0) {
-        goToNextPage()
-      } else {
-        goToPrevPage()
-      }
-    }
-
-    touchStartX.current = null
-    touchStartY.current = null
+    if (!emblaApi) return
+    emblaApi.scrollTo(index)
   }
 
   return (
@@ -108,60 +79,60 @@ function CatalogSection({ products, searchTerm, onSearchChange, onOpenEmail, onO
         </div>
       </div>
 
-      {!!productPages.length && (
+      {!!products.length && (
         <div className="catalog-carousel">
-          <div className="catalog-viewport" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-            <div
-              className="catalog-track"
-              style={{ transform: `translateX(-${activePage * 100}%)` }}
-            >
-              {productPages.map((page, pageIndex) => (
-                <div
-                  className="catalog-page"
-                  key={`page-${pageIndex}`}
-                  style={{ gridTemplateColumns: `repeat(${page.length}, minmax(0, 1fr))` }}
-                >
-                  {page.map((product) => (
-                    <article className="catalog-card" key={product.id}>
-                      <p className="panel-label">{product.category}</p>
-                      <h3>{product.name}</h3>
-                      <p>{product.description}</p>
-                      <div className="tag-row">
-                        {product.tags.map((tag) => (
-                          <span className="tag-chip" key={tag}>
-                            {tag}
-                          </span>
-                        ))}
+          <div className="catalog-viewport" ref={emblaRef}>
+            <div className="catalog-track">
+              {products.map((product) => (
+                <div className="catalog-slide" key={product.id}>
+                  <article className="catalog-card">
+                    <div className="catalog-image-wrap">
+                      <LazyLoadImage
+                        className="catalog-image"
+                        src={product.image}
+                        alt={product.name}
+                        effect="blur"
+                        wrapperClassName="catalog-image-lazy-wrapper"
+                      />
+                    </div>
+                    <p className="panel-label">{product.category}</p>
+                    <h3>{product.name}</h3>
+                    <p>{product.description}</p>
+                    <div className="tag-row">
+                      {product.tags.map((tag) => (
+                        <span className="tag-chip" key={tag}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="catalog-footer">
+                      <strong>{product.price}</strong>
+                      <div className="catalog-actions">
+                        <button
+                          className="primary-button small-button"
+                          type="button"
+                          onClick={() => onOpenWhatsapp('whatsapp', product.name)}
+                        >
+                          WhatsApp
+                        </button>
+                        <button
+                          className="primary-button small-button"
+                          type="button"
+                          onClick={() => onOpenEmail('email', product.name)}
+                        >
+                          Email
+                        </button>
                       </div>
-                      <div className="catalog-footer">
-                        <strong>{product.price}</strong>
-                        <div className="catalog-actions">
-                          <button
-                            className="primary-button small-button"
-                            type="button"
-                            onClick={() => onOpenWhatsapp('whatsapp', product.name)}
-                          >
-                            WhatsApp
-                          </button>
-                          <button
-                            className="primary-button small-button"
-                            type="button"
-                            onClick={() => onOpenEmail('email', product.name)}
-                          >
-                            Email
-                          </button>
-                        </div>
-                      </div>
-                    </article>
-                  ))}
+                    </div>
+                  </article>
                 </div>
               ))}
             </div>
           </div>
 
-          {productPages.length > 1 && (
+          {scrollSnaps.length > 1 && (
             <div className="catalog-dots" aria-label="Catalog pages">
-              {productPages.map((_, index) => (
+              {scrollSnaps.map((_, index) => (
                 <button
                   key={`dot-${index}`}
                   type="button"

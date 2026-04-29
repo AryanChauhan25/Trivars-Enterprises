@@ -1,3 +1,12 @@
+import customBusinessCardImage from '../assets/Custom Business Card Set.png'
+import customPenGiftBoxImage from '../assets/custom pen gift box.png'
+import executiveLetterheadImage from '../assets/Executive Letterhead Pack.png'
+import executiveNotebookImage from '../assets/executive notebook set.png'
+import filesBinderImage from '../assets/file and binder combo.png'
+import officeNotepadImage from '../assets/office notepad bundle.png'
+import presentationFolderImage from '../assets/Presentation Folder Kit.png'
+import printerPaperImage from '../assets/printer paper bulk box.png'
+
 const envWhatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || ''
 const envWhatsappLabel = import.meta.env.VITE_WHATSAPP_LABEL || ''
 const envContactEmail = import.meta.env.VITE_CONTACT_EMAIL || ''
@@ -46,9 +55,18 @@ export const offerings = [
 ]
 
 export const workflow = [
-  'Browse products by category or search for specific items.',
-  'Select a product and send enquiry via WhatsApp or email.',
-  'Get pricing, details, and bulk order support from our team.',
+  {
+    title: 'Browse',
+    description: 'Browse products by category or search for specific items.',
+  },
+  {
+    title: 'Enquire',
+    description: 'Select a product and send enquiry via WhatsApp or email.',
+  },
+  {
+    title: 'Delivery',
+    description: 'Get pricing, details, and bulk order support from our team.',
+  },
 ]
 
 export const footerLinks = [
@@ -62,6 +80,7 @@ export const catalog = [
   {
     id: 1,
     name: 'Executive Letterhead Pack',
+    image: executiveLetterheadImage,
     category: 'Brand Identity',
     price: 'Rs. 799',
     tags: ['letterhead', 'branding', 'corporate'],
@@ -70,6 +89,7 @@ export const catalog = [
   {
     id: 2,
     name: 'Custom Business Card Set',
+    image: customBusinessCardImage,
     category: 'Brand Identity',
     price: 'Rs. 499',
     tags: ['business card', 'branding', 'sales'],
@@ -78,6 +98,7 @@ export const catalog = [
   {
     id: 3,
     name: 'Presentation Folder Kit',
+    image: presentationFolderImage,
     category: 'Brand Identity',
     price: 'Rs. 899',
     tags: ['folder', 'presentation', 'branding'],
@@ -86,6 +107,7 @@ export const catalog = [
   {
     id: 4,
     name: 'Office Notepad Bundle',
+    image: officeNotepadImage,
     category: 'Daily Operations',
     price: 'Rs. 349',
     tags: ['notepad', 'office', 'daily'],
@@ -94,6 +116,7 @@ export const catalog = [
   {
     id: 5,
     name: 'Printer Paper Bulk Box',
+    image: printerPaperImage,
     category: 'Daily Operations',
     price: 'Rs. 1,299',
     tags: ['paper', 'bulk', 'office'],
@@ -102,6 +125,7 @@ export const catalog = [
   {
     id: 6,
     name: 'Files and Binder Combo',
+    image: filesBinderImage,
     category: 'Daily Operations',
     price: 'Rs. 649',
     tags: ['files', 'binder', 'storage'],
@@ -110,6 +134,7 @@ export const catalog = [
   {
     id: 7,
     name: 'Executive Notebook Set',
+    image: executiveNotebookImage,
     category: 'Leadership Kits',
     price: 'Rs. 999',
     tags: ['notebook', 'executive', 'gift'],
@@ -118,6 +143,7 @@ export const catalog = [
   {
     id: 8,
     name: 'Custom Pen Gift Box',
+    image: customPenGiftBoxImage,
     category: 'Leadership Kits',
     price: 'Rs. 1,499',
     tags: ['pen', 'gift', 'executive'],

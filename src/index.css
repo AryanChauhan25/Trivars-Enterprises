@@ -405,8 +405,7 @@ p {
 }
 
 .panel-feature li::before,
-.offering-card p::before,
-.workflow-step p::before {
+.offering-card p::before {
   content: "";
   position: absolute;
   left: 0;
@@ -548,14 +547,13 @@ p {
 
 .catalog-track {
   display: flex;
-  transition: transform 420ms ease;
-  will-change: transform;
+  margin-left: -18px;
 }
 
-.catalog-page {
-  min-width: 100%;
-  display: grid;
-  gap: 18px;
+.catalog-slide {
+  flex: 0 0 33.3333%;
+  min-width: 0;
+  padding-left: 18px;
 }
 
 .catalog-dots {
@@ -593,13 +591,52 @@ p {
   gap: 18px;
 }
 
+.catalog-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(29, 96, 112, 0.1), rgba(17, 36, 51, 0.06));
+  border: 1px solid rgba(17, 36, 51, 0.08);
+}
+
+.catalog-image-lazy-wrapper {
+  display: block !important;
+  width: 100%;
+  height: 100%;
+}
+
+.catalog-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
 .catalog-card p {
   margin-top: 0;
 }
 
 .tag-row {
-  margin-top: auto;
+  margin-top: 0;
   padding-top: 8px;
+}
+
+.catalog-card h3 {
+  margin-bottom: 8px;
+}
+
+.catalog-card p {
+  margin-bottom: 0;
+}
+
+.catalog-card > p:not(.panel-label) {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .tag-chip {
@@ -616,11 +653,14 @@ p {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 18px;
+  margin-top: 8px;
+  padding-top: 0;
 }
 
 .catalog-footer strong {
   font-size: 1.2rem;
+  margin: 0;
+  line-height: 1.2;
 }
 
 .catalog-actions {
@@ -649,6 +689,17 @@ p {
   position: relative;
 }
 
+.offering-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.offering-header h3 {
+  margin: 0;
+}
+
 .card-index {
   width: 42px;
   height: 42px;
@@ -659,21 +710,58 @@ p {
   background: rgba(29, 96, 112, 0.12);
   color: var(--primary);
   font-weight: 800;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+.card-index svg {
+  width: 20px;
+  height: 20px;
+}
+
+@keyframes iconFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
 }
 
 .story-band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   grid-template-columns: 1fr;
   align-items: center;
   border-radius: 34px;
   padding: 32px;
   text-align: center;
+  background:
+    linear-gradient(160deg, rgba(17, 36, 51, 0.72), rgba(17, 36, 51, 0.58)),
+    var(--story-bg-image) center / cover no-repeat;
+}
+
+.story-band > * {
+  position: relative;
+  z-index: 1;
+}
+
+.story-band .eyebrow {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.story-band .story-copy h2,
+.story-band .story-copy p {
+  color: #fff;
 }
 
 .quote-card {
   border-radius: 28px;
   padding: 26px;
-  background: linear-gradient(140deg, #fff3ea, #fffdfa);
-  border: 1px solid rgba(217, 91, 52, 0.14);
+  background: linear-gradient(140deg, rgba(255, 243, 234, 0.92), rgba(255, 253, 250, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(4px);
 }
 
 .quote-card p {
@@ -696,12 +784,32 @@ p {
   position: relative;
 }
 
-.workflow-step span {
-  display: inline-block;
+.workflow-step-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 12px;
-  color: var(--accent);
-  font-size: 1.2rem;
-  font-weight: 800;
+}
+
+.workflow-step-icon {
+  width: 42px;
+  height: 42px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(29, 96, 112, 0.12);
+  color: var(--primary);
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+.workflow-step-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.workflow-step h3 {
+  margin: 0;
+  font-size: 1.05rem;
 }
 
 .site-footer {
@@ -1154,9 +1262,14 @@ p {
     border-radius: 22px;
   }
 
+  .catalog-image-wrap {
+    border-radius: 14px;
+  }
+
   .catalog-footer {
     align-items: stretch;
     flex-direction: column;
+    gap: 8px;
   }
 
   .catalog-actions {
@@ -1251,8 +1364,13 @@ p {
     padding: 0 16px;
   }
 
-  .catalog-page {
-    gap: 16px;
+  .catalog-track {
+    margin-left: -16px;
+  }
+
+  .catalog-slide {
+    flex-basis: 50%;
+    padding-left: 16px;
   }
 
   .footer-grid {
@@ -1311,7 +1429,7 @@ p {
   .catalog-footer strong,
   .catalog-card h3,
   .offering-card h3,
-  .workflow-step span {
+  .workflow-step h3 {
     font-size: 0.95rem;
   }
 
@@ -1364,8 +1482,17 @@ p {
     border-radius: 18px;
   }
 
-  .catalog-page {
-    gap: 14px;
+  .catalog-image-wrap {
+    border-radius: 12px;
+  }
+
+  .catalog-track {
+    margin-left: -14px;
+  }
+
+  .catalog-slide {
+    flex-basis: 100%;
+    padding-left: 14px;
   }
 
   .catalog-dots {
