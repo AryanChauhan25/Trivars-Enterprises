@@ -4,26 +4,24 @@ function HeroSection({ onOpenEmail, onOpenWhatsapp }) {
   return (
     <section className="hero">
       <div className="hero-copy">
-        <p className="eyebrow">Complete stationery solutions for businesses</p>
-        <h1>Search products and connect instantly through WhatsApp or email.</h1>
+        <p className="eyebrow">Corporate Stationery & Office Supplies</p>
+        <h1>Your Trusted Partner for Corporate Stationery & Bulk Office Supplies</h1>
         <p className="lead">
-          This version follows the lighter Aryan Clinic interaction style: no full login flow, just a polished
-          catalog, floating contact actions, and fast enquiry popups for customers who want product details, pricing,
-          or bulk-order guidance.
+          Explore a wide range of office essentials, compare products, and connect with us instantly for bulk orders, pricing, or customized requirements.
         </p>
 
         <div className="hero-actions">
           <a className="primary-button" href="#catalog">
-            Browse catalog
+            View Products
           </a>
           <button className="primary-button" type="button" onClick={onOpenWhatsapp}>
-            Quick WhatsApp enquiry
+            Enquire on WhatsApp
           </button>
         </div>
 
         <div className="hero-secondary-cta">
           <button className="primary-button" type="button" onClick={onOpenEmail}>
-            Request pricing and support
+            Request a Quote
           </button>
         </div>
       </div>
@@ -40,15 +38,15 @@ function HeroSection({ onOpenEmail, onOpenWhatsapp }) {
 
         <div className="panel-grid">
           <article className="panel-card accent-card">
-            <p className="panel-label">Enquiry-first</p>
-            <strong>WhatsApp and email without signup friction</strong>
-            <span>Customers can view products freely and contact you only when they are ready.</span>
+            <p className="panel-label">Easy Enquiry</p>
+            <strong>Connect instantly via WhatsApp or email</strong>
+            <span>Browse products and contact us directly for pricing, bulk orders, or custom requirements.</span>
           </article>
 
           <article className="panel-card">
-            <p className="panel-label">Search-ready</p>
-            <strong>Find products by name, category, or use</strong>
-            <span>Live filtering helps visitors move from browsing to enquiry much faster.</span>
+            <p className="panel-label">Wide Product Range</p>
+            <strong>Stationery for every business need</strong>
+            <span>Explore categories and find the right office supplies for your organization.</span>
           </article>
         </div>
       </div>

@@ -73,10 +73,10 @@ function SiteHeader({ contact, whatsappMessage, onOpenEmail }) {
           aria-label="Primary navigation"
         >
           <a href="#catalog" onClick={closeMenu}>
-            Catalog
+            Products
           </a>
           <a href="#offerings" onClick={closeMenu}>
-            Offerings
+            Services
           </a>
           <a href="#workflow" onClick={closeMenu}>
             Workflow

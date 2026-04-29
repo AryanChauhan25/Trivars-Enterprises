@@ -14,10 +14,9 @@ function SiteFooter({
             <p className="eyebrow">Trivars Enterprises</p>
             <h2>Business stationery, printing, and office supply support in one place.</h2>
             <p>
-              A cleaner React storefront for businesses that want to browse products, compare options, and send
-              enquiries quickly through WhatsApp or email.
+              We provide high-quality stationery, printing services, and bulk office supplies for businesses. Contact us for pricing, bulk orders, or customized solutions.
             </p>
-            <p className="footer-copyright">Copyright 2026 Trivars Enterprises - All Rights Reserved.</p>
+            <p className="footer-copyright">© 2026 Trivars Enterprises. All rights reserved.</p>
           </section>
 
           <section className="footer-block" id="footer-contact">

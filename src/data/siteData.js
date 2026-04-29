@@ -11,10 +11,10 @@ export const CONTACT = {
 export const pageTitle = 'Trivars Enterprises | Business Stationery Store'
 
 export const metaDescription =
-  'Trivars Enterprises provides complete corporate stationery, professional printing, bulk office essentials, and quick WhatsApp or email enquiries from a searchable product catalog.'
+  'Trivars Enterprises offers high-quality corporate stationery, printing services, and bulk office supplies with quick WhatsApp and email enquiry support.'
 
 export const descriptionText =
-  'Instead of pushing customers into account creation, this version keeps the catalog open and uses quick enquiry popups, floating contact actions, and simple product-level outreach in the same spirit as the Aryan Clinic app.'
+  'Trivars Enterprises provides reliable corporate stationery and office supply solutions for businesses. Browse our catalog and connect with us instantly for pricing, bulk orders, or customized requirements.'
 
 export const highlights = [
   'Complete stationery solutions for businesses of all sizes',
@@ -46,15 +46,15 @@ export const offerings = [
 ]
 
 export const workflow = [
-  'Search the catalog by product, category, or business use.',
-  'Open a quick WhatsApp or email enquiry popup from any product.',
-  'Share your requirement and receive product guidance, pricing, and bulk-order support.',
+  'Browse products by category or search for specific items.',
+  'Select a product and send enquiry via WhatsApp or email.',
+  'Get pricing, details, and bulk order support from our team.',
 ]
 
 export const footerLinks = [
-  { label: 'Catalog', href: '#catalog' },
-  { label: 'Offerings', href: '#offerings' },
-  { label: 'Workflow', href: '#workflow' },
+  { label: 'Products', href: '#catalog' },
+  { label: 'Services', href: '#offerings' },
+  { label: 'How It Works', href: '#workflow' },
   { label: 'Contact', href: '#footer-contact' },
 ]
 
