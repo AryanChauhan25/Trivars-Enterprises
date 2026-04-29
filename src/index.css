@@ -1001,6 +1001,8 @@ p {
 
   .topbar {
     align-items: stretch;
+    justify-items: stretch;
+    text-align: left;
     gap: 14px;
   }
 
@@ -1017,8 +1019,16 @@ p {
   .brand-lockup {
     align-items: center;
     gap: 14px;
-    flex-direction: column;
-    text-align: center;
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .topbar-right {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 10px;
   }
 
   .brand-logo {
@@ -1075,11 +1085,15 @@ p {
 
   .menu-toggle {
     display: inline-block;
-    align-self: flex-end;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    align-self: start;
   }
 
   .site-nav {
     display: none;
+    grid-column: 1 / -1;
     width: 100%;
     border: 1px solid var(--line);
     border-radius: 16px;
@@ -1095,7 +1109,6 @@ p {
 
   .site-nav a,
   .hero-actions > *,
-  .topbar-actions > *,
   .footer-cta-group > *,
   .hero-secondary-cta button {
     width: 100%;
@@ -1111,6 +1124,18 @@ p {
 
   .top-strip button {
     width: 100%;
+  }
+
+  .topbar-actions {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+
+  .topbar-actions > * {
+    width: auto;
+    min-width: 140px;
+    flex: 1 1 160px;
+    min-height: 44px;
   }
 
   .hero-secondary-cta {
@@ -1221,11 +1246,8 @@ p {
   }
 
   .primary-button,
-  .ghost-button,
-  .float-email,
-  .float-whatsapp {
-    width: 100%;
-    min-height: 48px;
+  .ghost-button {
+    min-height: 44px;
     padding: 0 16px;
   }
 
@@ -1268,6 +1290,7 @@ p {
 
   .topbar h1 {
     font-size: 1.2rem;
+    line-height: 1.15;
   }
 
   .hero h1,
@@ -1310,7 +1333,6 @@ p {
 
   .primary-button,
   .ghost-button {
-    width: 100%;
     min-height: 42px;
     padding: 0 12px;
   }
@@ -1322,13 +1344,10 @@ p {
   }
 
   .hero-actions > *,
-  .topbar-actions > *,
-  .footer-cta-group > * {
-    width: 100%;
-  }
-
   .topbar-actions > * {
-    flex: 1 1 100%;
+    width: auto;
+    min-width: 120px;
+    flex: 1 1 46%;
   }
 
   .catalog-grid,
