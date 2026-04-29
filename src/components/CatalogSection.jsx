@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 function getVisibleCount(width) {
   if (width <= 640) return 1
@@ -9,6 +9,8 @@ function getVisibleCount(width) {
 function CatalogSection({ products, searchTerm, onSearchChange, onOpenEmail, onOpenWhatsapp }) {
   const [visibleCount, setVisibleCount] = useState(() => getVisibleCount(window.innerWidth))
   const [activePage, setActivePage] = useState(0)
+  const touchStartX = useRef(null)
+  const touchStartY = useRef(null)
 
   useEffect(() => {
     function handleResize() {
@@ -45,6 +47,43 @@ function CatalogSection({ products, searchTerm, onSearchChange, onOpenEmail, onO
     setActivePage(index)
   }
 
+  function goToNextPage() {
+    if (productPages.length <= 1) return
+    setActivePage((current) => (current + 1) % productPages.length)
+  }
+
+  function goToPrevPage() {
+    if (productPages.length <= 1) return
+    setActivePage((current) => (current - 1 + productPages.length) % productPages.length)
+  }
+
+  function handleTouchStart(event) {
+    const firstTouch = event.touches[0]
+    touchStartX.current = firstTouch.clientX
+    touchStartY.current = firstTouch.clientY
+  }
+
+  function handleTouchEnd(event) {
+    if (touchStartX.current === null || touchStartY.current === null) return
+
+    const endTouch = event.changedTouches[0]
+    const deltaX = touchStartX.current - endTouch.clientX
+    const deltaY = touchStartY.current - endTouch.clientY
+    const minSwipeDistance = 40
+
+    // Only handle horizontal gestures so normal page scroll still feels natural.
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+      if (deltaX > 0) {
+        goToNextPage()
+      } else {
+        goToPrevPage()
+      }
+    }
+
+    touchStartX.current = null
+    touchStartY.current = null
+  }
+
   return (
     <section className="section" id="catalog">
       <div className="section-heading">
@@ -71,7 +110,7 @@ function CatalogSection({ products, searchTerm, onSearchChange, onOpenEmail, onO
 
       {!!productPages.length && (
         <div className="catalog-carousel">
-          <div className="catalog-viewport">
+          <div className="catalog-viewport" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
             <div
               className="catalog-track"
               style={{ transform: `translateX(-${activePage * 100}%)` }}

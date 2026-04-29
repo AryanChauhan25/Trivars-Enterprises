@@ -209,6 +209,29 @@ p {
   justify-content: flex-end;
 }
 
+.menu-toggle {
+  display: none;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.84);
+  border-radius: 12px;
+  width: 46px;
+  height: 42px;
+  padding: 9px 8px;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--ink);
+}
+
+.menu-toggle span + span {
+  margin-top: 6px;
+}
+
 .site-nav a {
   color: var(--primary);
   font-weight: 700;
@@ -520,6 +543,7 @@ p {
 
 .catalog-viewport {
   overflow: hidden;
+  touch-action: pan-y;
 }
 
 .catalog-track {
@@ -975,6 +999,11 @@ p {
     padding: 20px;
   }
 
+  .topbar {
+    align-items: stretch;
+    gap: 14px;
+  }
+
   .hero {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -1044,13 +1073,27 @@ p {
     justify-content: center;
   }
 
+  .menu-toggle {
+    display: inline-block;
+    align-self: flex-end;
+  }
+
   .site-nav {
-    gap: 10px;
-    flex-wrap: wrap;
+    display: none;
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.88);
+  }
+
+  .site-nav.is-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .site-nav a,
-  .topbar button,
   .hero-actions > *,
   .topbar-actions > *,
   .footer-cta-group > *,
@@ -1060,7 +1103,10 @@ p {
   }
 
   .site-nav a {
-    padding: 10px 0;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(29, 96, 112, 0.08);
+    text-align: center;
   }
 
   .top-strip button {
@@ -1107,24 +1153,24 @@ p {
     right: 12px;
   }
 
-  .sticky-quote {
-    bottom: 12px;
-    width: calc(100% - 24px);
-    min-height: 46px;
-    padding: 0 16px;
-  }
-
   .floating-actions {
-    bottom: 66px;
+    bottom: 12px;
     gap: 8px;
+    display: flex;
+    grid-template-columns: none;
   }
 
   .float-whatsapp,
   .float-email {
     min-width: 0;
-    width: 100%;
+    width: auto;
+    flex: 1 1 0;
     min-height: 44px;
     padding: 0 14px;
+  }
+
+  .sticky-quote {
+    display: none;
   }
 
   .site-nav {
@@ -1279,6 +1325,10 @@ p {
   .topbar-actions > *,
   .footer-cta-group > * {
     width: 100%;
+  }
+
+  .topbar-actions > * {
+    flex: 1 1 100%;
   }
 
   .catalog-grid,
