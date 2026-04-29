@@ -5,7 +5,7 @@ function OfferingsSection() {
     <section className="section" id="offerings">
       <div className="section-heading">
         <p className="eyebrow">Offerings</p>
-        <h3>Built for procurement teams, founders, and growing offices.</h3>
+        <h2>Built for procurement teams, founders, and growing offices.</h2>
       </div>
 
       <div className="offering-grid">
@@ -14,7 +14,7 @@ function OfferingsSection() {
             <div className="card-index" aria-hidden="true">
               {offering.title.slice(0, 1)}
             </div>
-            <h4>{offering.title}</h4>
+            <h3>{offering.title}</h3>
             <p>{offering.description}</p>
           </article>
         ))}

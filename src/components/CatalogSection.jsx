@@ -49,7 +49,7 @@ function CatalogSection({ products, searchTerm, onSearchChange, onOpenEmail, onO
     <section className="section" id="catalog">
       <div className="section-heading">
         <p className="eyebrow">Storefront</p>
-        <h3>Search the stationery catalog and enquire product by product.</h3>
+        <h2>Search the stationery catalog and enquire product by product.</h2>
       </div>
 
       <div className="catalog-toolbar">
@@ -85,7 +85,7 @@ function CatalogSection({ products, searchTerm, onSearchChange, onOpenEmail, onO
                   {page.map((product) => (
                     <article className="catalog-card" key={product.id}>
                       <p className="panel-label">{product.category}</p>
-                      <h4>{product.name}</h4>
+                      <h3>{product.name}</h3>
                       <p>{product.description}</p>
                       <div className="tag-row">
                         {product.tags.map((tag) => (
@@ -98,7 +98,7 @@ function CatalogSection({ products, searchTerm, onSearchChange, onOpenEmail, onO
                         <strong>{product.price}</strong>
                         <div className="catalog-actions">
                           <button
-                            className="ghost-button small-button"
+                            className="primary-button small-button"
                             type="button"
                             onClick={() => onOpenWhatsapp('whatsapp', product.name)}
                           >
@@ -138,7 +138,7 @@ function CatalogSection({ products, searchTerm, onSearchChange, onOpenEmail, onO
 
       {!products.length && (
         <div className="empty-state">
-          <h4>No products matched your search.</h4>
+          <h3>No products matched your search.</h3>
           <p>Try searching for notebooks, branding, executive, folders, or office.</p>
         </div>
       )}

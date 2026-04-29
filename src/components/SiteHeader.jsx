@@ -21,7 +21,7 @@ function SiteHeader({ contact, whatsappMessage, onOpenEmail }) {
 
         <div className="topbar-actions">
           <a
-            className="ghost-button"
+            className="primary-button"
             href={`https://wa.me/${contact.whatsappNumber}?text=${whatsappMessage}`}
             target="_blank"
             rel="noreferrer"

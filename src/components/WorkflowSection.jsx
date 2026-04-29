@@ -5,7 +5,7 @@ function WorkflowSection() {
     <section className="section workflow-section" id="workflow">
       <div className="section-heading">
         <p className="eyebrow">Workflow</p>
-        <h3>Simple enough for repeat orders, polished enough for brand-critical projects.</h3>
+        <h2>Simple enough for repeat orders, polished enough for brand-critical projects.</h2>
       </div>
 
       <div className="workflow-list">

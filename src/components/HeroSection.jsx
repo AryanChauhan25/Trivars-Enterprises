@@ -5,7 +5,7 @@ function HeroSection({ onOpenEmail, onOpenWhatsapp }) {
     <section className="hero">
       <div className="hero-copy">
         <p className="eyebrow">Complete stationery solutions for businesses</p>
-        <h2>Search products and connect instantly through WhatsApp or email.</h2>
+        <h1>Search products and connect instantly through WhatsApp or email.</h1>
         <p className="lead">
           This version follows the lighter Aryan Clinic interaction style: no full login flow, just a polished
           catalog, floating contact actions, and fast enquiry popups for customers who want product details, pricing,
@@ -16,14 +16,14 @@ function HeroSection({ onOpenEmail, onOpenWhatsapp }) {
           <a className="primary-button" href="#catalog">
             Browse catalog
           </a>
-          <button className="ghost-button" type="button" onClick={onOpenWhatsapp}>
+          <button className="primary-button" type="button" onClick={onOpenWhatsapp}>
             Quick WhatsApp enquiry
           </button>
         </div>
 
         <div className="hero-secondary-cta">
-          <button type="button" onClick={onOpenEmail}>
-            Request pricing by email
+          <button className="primary-button" type="button" onClick={onOpenEmail}>
+            Request pricing and support
           </button>
         </div>
       </div>

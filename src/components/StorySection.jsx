@@ -3,7 +3,7 @@ function StorySection({ descriptionText }) {
     <section className="section story-band">
       <div className="story-copy">
         <p className="eyebrow">Positioning</p>
-        <h3>A lighter, cleaner Trivars enquiry journey.</h3>
+        <h2>A lighter, cleaner Trivars enquiry journey.</h2>
         <p>{descriptionText}</p>
       </div>
 
